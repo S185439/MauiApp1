@@ -21,12 +21,21 @@ public partial class MainViewModel : ObservableObject
     string text;
 
     [RelayCommand]
-    void add()
+    void Add()
     {   
         if (string.IsNullOrWhiteSpace(Text))
             return;
         Items.Add(Text);
         Text = string.Empty;
     }
-}
+
+    [RelayCommand]
+    void Delete(string s)
+    {
+        if (Items.Contains(s))
+        {
+            Items.Remove(s);
+        }
+    }
+ }
 
