@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+			 xmlns:viewmodel="clr-namespace:MauiApp1.ViewModels"
+			 x:DataType="viewmodel:MainViewModel">
+
+    <Grid RowDefinitions="100, Auto, *"
+          ColumnDefinitions=".75*, .25*"
+          Padding="15"
+          RowSpacing="15"
+          ColumnSpacing="15">
+
+        <Image Grid.ColumnSpan="2"
+               Source="dotnet_bot.png"
+               BackgroundColor="Black"/>
+
+        <Entry Placeholder="Enter Item"
+			   Text="{Binding Text}"
+               Grid.Row="1"/>
+
+        <Button Text="Add"
+				Command="{Binding addCommand}"
+                Grid.Row="1"
+                Grid.Column="2"/>
+
+        <CollectionView Grid.Row="2"
+                        Grid.ColumnSpan="2"
+						ItemsSource="{Binding Items}">			
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Delete"
+                                       BackgroundColor="Red"/>
+                        </SwipeView.RightItems>
+                        <Grid Padding="0,5">
+                            <Frame>
+                                <Label Text="{Binding}"
+                                       FontSize="24"/>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
