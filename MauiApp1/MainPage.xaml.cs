@@ -9,10 +9,11 @@ namespace MauiApp1
         public MainPage(MainViewModel vm)
         {
             InitializeComponent();
+
             BindingContext = vm;
         }
         
-         
+        
        
     }
 
