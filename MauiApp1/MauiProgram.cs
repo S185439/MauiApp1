@@ -25,6 +25,9 @@ namespace MauiApp1
 
             builder.Services.AddTransient<DetailPage>();
             builder.Services.AddTransient<DetailViewModel>();
+
+            builder.Services.AddTransient<ReminderPage>();
+            builder.Services.AddTransient<ReminderViewModel>();
 #endif
 
             return builder.Build();

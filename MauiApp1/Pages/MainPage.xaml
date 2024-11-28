@@ -15,9 +15,10 @@
                Source="dotnet_bot.png"
                BackgroundColor="Black"/>
 
-        <Entry Placeholder="Enter Item"
-			   Text="{Binding Text}"
-               Grid.Row="1"/>
+        <Picker ItemsSource="{Binding PageNames}"
+                SelectedItem="{Binding Text}"
+                Title="Select a page"
+                Grid.Row="1"/>
 
         <Button Text="Add"
 				Command="{Binding AddCommand}"
@@ -47,7 +48,6 @@
                             </Frame>
                         </Grid>
                     </SwipeView>
-                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

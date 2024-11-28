@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 namespace MauiApp1.ViewModels;
 
 [QueryProperty("Text", "Text")]
-public partial class DetailViewModel : ObservableObject
+public partial class ReminderViewModel : ObservableObject
 {
     [ObservableProperty]
     string text;
