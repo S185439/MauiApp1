@@ -20,10 +20,13 @@ namespace MauiApp1
 
 #if DEBUG
             builder.Logging.AddDebug();
+            builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddTransient<DetailPage>();
             builder.Services.AddTransient<DetailViewModel>();
+            builder.Services.AddTransient<LoginRegisterPage>();
+            builder.Services.AddTransient<LoginRegisterViewModel>();
             builder.Services.AddTransient<ReminderPage>();
             builder.Services.AddTransient<ReminderViewModel>();
             builder.Services.AddTransient<EventDetailPage>();
