@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Pages.LoginRegisterPage"
+             xmlns:viewmodel="clr-namespace:MauiApp1.ViewModels"
+             x:DataType="viewmodel:LoginRegisterViewModel"
+             Title="LoginRegisterPage">
+
+    <Grid   RowDefinitions="100, Auto, *"
+            ColumnDefinitions=".75*, .25*"
+            Padding="15"
+            RowSpacing="15"
+            ColumnSpacing="15">
+
+        <Image Grid.ColumnSpan="2"
+               Source="dotnet_bot.png"
+               BackgroundColor="Black"/>
+
+        <Label Text="Login/Register"
+               FontSize="24"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Entry Placeholder="Username"
+               Text="{Binding Username}"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Entry Placeholder="Password"
+               Text="{Binding Password}"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Button Text="Login"
+                Command="{Binding LoginCommand}"
+                Grid.Row="1"
+                Grid.Column="1"/>
+
+        <Entry Placeholder="Username"
+               Text="{Binding Username}"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Entry Placeholder="Email"
+               Text="{Binding Email}"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Entry Placeholder="Password"
+               Text="{Binding Password}"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"/>
+
+        <Button Text="Register"
+                Command="{Binding RegisterCommand}"
+                Grid.Row="1"
+                Grid.Column="2"/>
+    </Grid>
+</ContentPage>
