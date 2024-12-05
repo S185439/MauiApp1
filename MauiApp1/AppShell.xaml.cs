@@ -7,12 +7,12 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        Routing.RegisterRoute(nameof(DetailPage), typeof(DetailPage));
+        Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+        Routing.RegisterRoute(nameof(LoginRegisterPage), typeof(LoginRegisterPage));
         Routing.RegisterRoute(nameof(ReminderPage), typeof(ReminderPage));
         Routing.RegisterRoute(nameof(CalendarPage), typeof(CalendarPage));
         Routing.RegisterRoute(nameof(EventDetailPage), typeof(EventDetailPage));
         Routing.RegisterRoute(nameof(InsuranceSubscribtionPage), typeof(InsuranceSubscribtionPage));
         Routing.RegisterRoute(nameof(TodoPage), typeof(TodoPage));
-        Routing.RegisterRoute(nameof(LoginRegisterPage), typeof(LoginRegisterPage));
     }
 }

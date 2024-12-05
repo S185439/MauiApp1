@@ -2,11 +2,11 @@
 
 namespace MauiApp1
 {
-    public partial class MainPage : ContentPage
+    public partial class HomePage : ContentPage
     {
         int count = 0;
 
-        public MainPage(MainViewModel vm)
+        public HomePage(HomeViewModel vm)
         {
             InitializeComponent();
 

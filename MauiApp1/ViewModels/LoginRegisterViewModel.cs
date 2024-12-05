@@ -1,13 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MauiApp1.DataObjects;
 using System.Net.Http.Json;
 
+namespace MauiApp1.ViewModels;
 
 [QueryProperty("Text", "Text")]
 public partial class LoginRegisterViewModel : ObservableObject
@@ -42,7 +38,7 @@ public partial class LoginRegisterViewModel : ObservableObject
         {
             try
             {
-                var user = await _httpClient.GetFromJsonAsync<UserDto>($"users/username/{Username}");
+                var user = await _httpClient.GetFromJsonAsync<UserDto>($"http://localhost:5001/users/username/{Username}");
                 if (user == null)
                 {
                     Console.WriteLine("User not found");
@@ -53,7 +49,8 @@ public partial class LoginRegisterViewModel : ObservableObject
                     Console.WriteLine("Invalid password");
                     return;
                 }
-                await Shell.Current.GoToAsync("MainPage");
+                var loggedInUser = new Dictionary<string, object> { { "User", user } };
+                await Shell.Current.GoToAsync("HomePage", loggedInUser);
             }
             catch (Exception ex)
             {
@@ -70,13 +67,16 @@ public partial class LoginRegisterViewModel : ObservableObject
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("users", new UserDto { Id = Guid.NewGuid(),  Name = Username, Password = Password, Email = EntryEmail });
+            var user = new UserDto { Id = Guid.NewGuid(), Name = Username, Password = Password, Email = EntryEmail };
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5001/users") { Content = JsonContent.Create(user) };
+            var response = await _httpClient.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
             {
                 Console.WriteLine("User already exists");
                 return;
             }
-            await Shell.Current.GoToAsync("MainPage");
+            var loggedInUser = new Dictionary<string, object> { { "User", user } };
+            await Shell.Current.GoToAsync("HomePage", loggedInUser);
         }
         catch (Exception ex)
         {
@@ -92,5 +92,4 @@ public partial class LoginRegisterViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("..");
     }
-
 }

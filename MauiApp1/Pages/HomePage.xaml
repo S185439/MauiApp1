@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.MainPage"
+             x:Class="MauiApp1.HomePage"
 			 xmlns:viewmodel="clr-namespace:MauiApp1.ViewModels"
-			 x:DataType="viewmodel:MainViewModel"
-             Title="MainPage">
+			 x:DataType="viewmodel:HomeViewModel"
+             Title="HomePage">
              
-    <Grid RowDefinitions="100, Auto, *"
+    <Grid RowDefinitions="100, Auto, Auto, Auto, *"
           ColumnDefinitions=".75*, .25*"
           Padding="15"
           RowSpacing="15"
@@ -16,18 +16,36 @@
                Source="dotnet_bot.png"
                BackgroundColor="Black"/>
 
+        <Label VerticalOptions="Center"
+                FontSize="24"
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
+            <Label.Text>
+                <MultiBinding StringFormat="Hello there {0}">
+                    <Binding Path="User.Name"/>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
         <Picker ItemsSource="{Binding WindowDtos}"
-                ItemDisplayBinding="{Binding Name}"
+                ItemDisplayBinding="{Binding PageName}"
                 SelectedItem="{Binding SelectedWindow}"
-                Title="Select a page"
-                Grid.Row="1"/>
+                Title="Select a page type"
+                Grid.Row="3"/>
+
+        <Entry Placeholder="Enter a name for the new window"
+                Text="{Binding PageTitle}"
+                Grid.Row="2"
+                Grid.RowSpan="1"
+                Grid.ColumnSpan="1"/>
 
         <Button Text="Add"
 				Command="{Binding AddCommand}"
-                Grid.Row="1"
+                Grid.Row="2"
+                
                 Grid.Column="2"/>
 
-        <CollectionView Grid.Row="2"
+        <CollectionView Grid.Row="4"
                         Grid.ColumnSpan="2"
 						ItemsSource="{Binding Items}">			
             <CollectionView.ItemTemplate>
@@ -36,13 +54,13 @@
                         <SwipeView.RightItems>
                             <SwipeItem Text="Delete"
                                        BackgroundColor="Red"
-                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=DeleteCommand}"
                                        CommandParameter="{Binding .}"/>
                         </SwipeView.RightItems>
                         <Grid Padding="0,5">
                             <Frame>
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=TapCommand}"
                                                           CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
                                 <Label Text="{Binding}"
@@ -53,6 +71,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
     </Grid>
 
 </ContentPage>

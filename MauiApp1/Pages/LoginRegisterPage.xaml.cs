@@ -7,7 +7,6 @@ public partial class LoginRegisterPage : ContentPage
 	public LoginRegisterPage(LoginRegisterViewModel vm)
 	{
 		InitializeComponent();
-
-        BindingContext = vm;
-    }
+		BindingContext = vm;
+	}
 }
