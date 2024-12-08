@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MauiApp1.DataObjects;
+using System.Net.Http.Json;
 
 namespace MauiApp1.ViewModels;
 
 [QueryProperty(nameof(User), "User")]
 public partial class HomeViewModel : ObservableObject
 {
-    public HomeViewModel()
+    HttpClient _httpClient;
+    public HomeViewModel(HttpClient httpClient)
     {
+        _httpClient = httpClient;
         Items = new ObservableCollection<WindowDto>();
 
         WindowDtos = new ObservableCollection<WindowDto>()
@@ -25,7 +28,8 @@ public partial class HomeViewModel : ObservableObject
             new() { PageName = "CalendarPage"},
             new() { PageName = "InsuranceSubscribtionPage"},
             new() { PageName = "EventDetailPage" },
-            new() { PageName = "ReminderPage" }
+            new() { PageName = "ReminderPage" },
+            new() { PageName = "TodoPage" }
         };
     }
 
@@ -45,21 +49,34 @@ public partial class HomeViewModel : ObservableObject
     string pageTitle;
 
     [RelayCommand]
-    void Add()
+    async Task Add()
     {
         Console.WriteLine(User.Name);
         if (SelectedWindow == null || string.IsNullOrWhiteSpace(SelectedWindow.PageName))
             return;
         WindowDto window = new WindowDto { Id = Guid.NewGuid(), PageName = SelectedWindow.PageName, Title = PageTitle  };
-        Items.Add(window);
+        try
+        {
+            await _httpClient.PostAsJsonAsync($"http://localhost:5001/users/{User.Id}/windows", window);
+            Items.Add(window);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
     [RelayCommand]
-    void Delete(WindowDto window)
+    async Task Delete(WindowDto window)
     {
-        if (Items.Contains(window))
+        try
         {
+            await _httpClient.DeleteAsync($"http://localhost:5001/users/{User.Id}/windows/{window.Id}");
             Items.Remove(window);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
         }
     }
 
@@ -67,7 +84,26 @@ public partial class HomeViewModel : ObservableObject
     async Task Tap(WindowDto window)
     {
         await Shell.Current.GoToAsync($"{window.PageName}");
+    }
 
+    public async Task LoadWindows()
+    {
+        try
+        {
+            var windows = await _httpClient.GetFromJsonAsync<List<WindowDto>>($"http://localhost:5001/users/{User.Id}/windows");
+            if (windows != null)
+            {
+                Items.Clear();
+                foreach (var window in windows)
+                {
+                    Items.Add(window);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
  }
 
