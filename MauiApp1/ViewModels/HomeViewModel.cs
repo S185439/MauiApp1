@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MauiApp1.DataObjects;
 using System.Net.Http.Json;
 
@@ -72,6 +66,7 @@ public partial class HomeViewModel : ObservableObject
         try
         {
             await _httpClient.DeleteAsync($"http://localhost:5001/users/{User.Id}/windows/{window.Id}");
+
             Items.Remove(window);
         }
         catch (Exception ex)
