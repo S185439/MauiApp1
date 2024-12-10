@@ -58,10 +58,55 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Details.cs" />
+	  <Compile Remove="ViewModels\Class1.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.91" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.91" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="Plugin.Maui.Calendar" Version="1.2.3" />
+		<PackageReference Include="xunit.assert" Version="2.9.2" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.9.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\CalendarPage.xaml.cs">
+	    <DependentUpon>CalendarPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\LoginRegisterPage.xaml.cs">
+	    <DependentUpon>LoginRegisterPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\ReminderPage.xaml.cs">
+	    <DependentUpon>ReminderPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\CalendarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LoginRegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\EventDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\InsuranceSubscribtionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ReminderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\TodoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

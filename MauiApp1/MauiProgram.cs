@@ -1,7 +1,6 @@
 ﻿using MauiApp1.ViewModels;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Hosting;
-
+using MauiApp1.Pages;
 
 namespace MauiApp1
 {
@@ -20,8 +19,21 @@ namespace MauiApp1
 
 #if DEBUG
             builder.Logging.AddDebug();
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<HttpClient>();
+            builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddSingleton<HomeViewModel>();
+            builder.Services.AddSingleton<LoginRegisterPage>();
+            builder.Services.AddSingleton<LoginRegisterViewModel>();
+            builder.Services.AddTransient<ReminderPage>();
+            builder.Services.AddTransient<ReminderViewModel>();
+            builder.Services.AddTransient<EventDetailPage>();
+            builder.Services.AddTransient<EventDetailViewModel>();
+            builder.Services.AddTransient<InsuranceSubscribtionPage>();
+            builder.Services.AddTransient<InsuranceSubscribtionViewModel>();
+            builder.Services.AddTransient<TodoPage>();
+            builder.Services.AddTransient<TodoViewModel>();
+            builder.Services.AddTransient<CalendarPage>();
+            builder.Services.AddTransient<CalendarViewModel>();
 #endif
 
             return builder.Build();
