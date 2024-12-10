@@ -1,6 +1,5 @@
 ﻿using MauiApp1.ViewModels;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Hosting;
 using MauiApp1.Pages;
 
 namespace MauiApp1

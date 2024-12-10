@@ -5,7 +5,6 @@ using System.Net.Http.Json;
 
 namespace MauiApp1.ViewModels;
 
-[QueryProperty("Text", "Text")]
 public partial class LoginRegisterViewModel : ObservableObject
 {
     private readonly HttpClient _httpClient;
@@ -13,10 +12,6 @@ public partial class LoginRegisterViewModel : ObservableObject
     public LoginRegisterViewModel(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        Text = string.Empty;
-        Username = string.Empty;
-        Password = string.Empty;
-        EntryEmail = string.Empty;
     }
 
     [ObservableProperty]
@@ -57,9 +52,6 @@ public partial class LoginRegisterViewModel : ObservableObject
                 Console.WriteLine(ex);
             }
         }
-
-        //If the user is not valid
-        //Show an error message
     }
 
     [RelayCommand]
